@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="accountReports.searchView" name="account_report_user_filter.searchView_inherit">
+
+<!-- 		<t t-jquery=".o_account_reports_date-filter-multi-company" t-debug="pdb" t-operation="after"> -->
+		<t t-jquery="div:last" t-operation="after">
+		
+			<div class="o_dropdown o_account_reports_date-filter-user">
+				<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+					<span class="fa fa-filter" />
+					User:
+					<span class="caret" />
+				</a>
+				<ul class="dropdown-menu o_filters_menu" role="menu"
+					style="height: 300px; overflow-y: auto;">
+					<t t-foreach="context.available_users" t-as="s">
+						<li t-att-title="s[1]" t-att-data-user-id="s[0]"
+							t-att-data-value="s[2]"
+							t-att-class="'o_account_reports_users ' + ((context.user_ids.indexOf(s[0]) !== -1) and 'selected' or '')">
+							<a>
+								<t t-esc='s[1]' />
+							</a>
+						</li>
+					</t>
+				</ul>
+			</div>
+
+		</t>
+
+	</t>
+
+</templates>  
