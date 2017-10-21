@@ -17,22 +17,23 @@ Please include following code snippet in the module account_reports > static > j
 1. Replace function get_html with following. This will add the available accounts in the general ledger report context:
 
     // Fetches the html and is previous report.context if any, else create it
-    get_html: function() {
-        var self = this;
-        var defs = [];
-        return new Model('account.report.context.common').call('return_context', [self.report_model, self.given_context, self.report_id]).then(function (result) {
-            self.context_model = new Model(result[0]);
-            self.context_id = result[1];
-            if (self.given_context.force_fy) { // Force the financial year in the new context
-                self.given_context = {};
-            }
-            // Finally, actually get the html and various data
-            return self.context_model.call('get_html_and_data', [self.context_id, self.given_context], {context: session.user_context}).then(function (result) {
-                self.report_type = result.report_type;
-                self.html = result.html;
-                self.xml_export = result.xml_export;
-                self.fy = result.fy;
-                self.report_context = result.report_context;
+    
+        get_html: function() {
+            var self = this;
+            var defs = [];
+            return new Model('account.report.context.common').call('return_context', [self.report_model, self.given_context, self.report_id]).then(function (result) {
+                self.context_model = new Model(result[0]);
+                self.context_id = result[1];
+                if (self.given_context.force_fy) { // Force the financial year in the new context
+                    self.given_context = {};
+                }
+                // Finally, actually get the html and various data
+                return self.context_model.call('get_html_and_data', [self.context_id, self.given_context], {context: session.user_context}).then(function (result) {
+                    self.report_type = result.report_type;
+                    self.html = result.html;
+                    self.xml_export = result.xml_export;
+                    self.fy = result.fy;
+                    self.report_context = result.report_context;
                 
                 if (result.available_journals) {
                     self.report_context.available_journals = result.available_journals;
