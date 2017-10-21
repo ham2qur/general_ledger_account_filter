@@ -18,12 +18,10 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-#         'views/templates.xml',
-#         'views/views.xml',
+        'views/views.xml',
     ],
     'qweb': [
-#         'static/src/xml/account_report_backend.xml',
+        'static/src/xml/account_report_backend.xml',
     ],    
     'js': [ 
 #         "static/src/js/account_reports_backend.js" 
